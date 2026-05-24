@@ -13,7 +13,7 @@ struct AddPeopleButton: View {
     var body: some View {
         Button(action: action) {
             HStack(spacing: 10) {
-                Image(systemName: "person.2.fill")
+                Image(systemName: Icon.addPeople)
                     .font(.system(size: 18))
                 
                 Text("Add People")

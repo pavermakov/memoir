@@ -42,7 +42,7 @@ struct RootView: View {
                         Spacer()
                         
                         VStack(spacing: 16) {
-                            Image(systemName: "note.text")
+                            Image(systemName: Icon.note)
                                 .font(.system(size: 40))
                                 .foregroundStyle(Color.memoirGold.opacity(0.6))
                             
@@ -77,7 +77,7 @@ struct RootView: View {
                     Button(action: {
                         isEditorOpen = true
                     }) {
-                        Label("Add Note", systemImage: "square.and.pencil")
+                        Label("Add Note", systemImage: Icon.addNote)
                     }
                 }
             }

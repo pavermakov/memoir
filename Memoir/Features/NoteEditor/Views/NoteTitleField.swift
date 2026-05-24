@@ -52,7 +52,7 @@ struct NoteTitleField: View {
                     isDatePickerPresented = true
                 } label: {
                     HStack(spacing: 4) {
-                        Image(systemName: "calendar")
+                        Image(systemName: Icon.calendar)
                         Text(date, format: .dateTime.month(.abbreviated).day().year())
                     }
                     .font(.system(.caption, design: .serif))
