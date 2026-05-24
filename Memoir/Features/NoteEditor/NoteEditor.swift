@@ -17,6 +17,8 @@ struct NoteEditor: View {
     @State private var date: Date = .now
     @State private var selectedItems: [PhotosPickerItem] = []
     @State private var selectedPhotos: [NotePhoto] = []
+    @State private var isFriendsEditorVisible = false
+    @State private var selectedFriends: [Friend] = []
     @FocusState private var focusField: NoteField?
     
     private var isNoteReady: Bool {
@@ -63,7 +65,17 @@ struct NoteEditor: View {
                 }
                 
                 AddPeopleButton {
-                    // TODO: Implement people selection
+                    isFriendsEditorVisible = true
+                }
+                .sheet(isPresented: $isFriendsEditorVisible) {
+                    FriendsListView(
+                        isPresented: $isFriendsEditorVisible,
+                        selectedFriends: $selectedFriends
+                    )
+                }
+                
+                if !selectedFriends.isEmpty {
+                    SelectedFriendsView(selectedFriends: $selectedFriends)
                 }
             }
             .contentMargins(24, for: .scrollContent)
@@ -79,12 +91,16 @@ struct NoteEditor: View {
                     isSaveButtonEnabled: isNoteReady,
                     onCancel: onCancel,
                     onSave: {
-                        let note = Note(title: title, date: date, message: message)
+                        let note = Note(
+                            title: title,
+                            date: date,
+                            message: message,
+                            friends: selectedFriends.isEmpty ? nil : selectedFriends
+                        )
                         onSave(note)
                     }
                 )
             }
-            
         }
     }
 }

@@ -17,7 +17,7 @@ struct NotePhotosPicker: View {
             if !selectedPhotos.isEmpty {
                 VStack(alignment: .leading, spacing: 12) {
                     HStack(spacing: 8) {
-                        Image(systemName: "photo.fill")
+                        Image(systemName: Icon.photo)
                             .font(.system(size: 14))
                             .foregroundStyle(Color.memoirGold)
                         

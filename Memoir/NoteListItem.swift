@@ -29,6 +29,19 @@ struct NoteListItem: View {
                 .font(.system(.subheadline, design: .serif))
                 .foregroundStyle(Color.memoirInk.opacity(0.5))
                 .lineLimit(2)
+            
+            if let friends = note.friends, !friends.isEmpty {
+                HStack(spacing: 6) {
+                    Image(systemName: Icon.addPeople)
+                        .font(.system(size: 10))
+                        .foregroundStyle(Color.memoirGold)
+                    
+                    Text(friends.map(\.firstName).joined(separator: ", "))
+                        .font(.system(.caption, design: .serif))
+                        .foregroundStyle(Color.memoirInk.opacity(0.4))
+                        .lineLimit(1)
+                }
+            }
         }
         .padding(.vertical, 4)
         .listRowBackground(Color.clear)

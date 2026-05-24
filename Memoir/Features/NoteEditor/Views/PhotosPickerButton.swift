@@ -18,7 +18,7 @@ struct PhotosPickerButton: View {
             photoLibrary: .shared()
         ) {
             HStack(spacing: 10) {
-                Image(systemName: "photo.on.rectangle.angled")
+                Image(systemName: Icon.addPhotos)
                     .font(.system(size: 20))
                 
                 Text("Add Photos")
