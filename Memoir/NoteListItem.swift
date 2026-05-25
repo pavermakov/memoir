@@ -12,7 +12,7 @@ struct NoteListItem: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            HStack {
+            HStack(spacing: 0) {
                 Text(note.title)
                     .font(.system(.headline, design: .serif))
                     .foregroundStyle(Color.memoirInk)
@@ -31,16 +31,7 @@ struct NoteListItem: View {
                 .lineLimit(2)
             
             if let friends = note.friends, !friends.isEmpty {
-                HStack(spacing: 6) {
-                    Image(systemName: Icon.addPeople)
-                        .font(.system(size: 10))
-                        .foregroundStyle(Color.memoirGold)
-                    
-                    Text(friends.map(\.firstName).joined(separator: ", "))
-                        .font(.system(.caption, design: .serif))
-                        .foregroundStyle(Color.memoirInk.opacity(0.4))
-                        .lineLimit(1)
-                }
+                FriendAvatarStack(friends: friends)
             }
         }
         .padding(.vertical, 4)
@@ -50,17 +41,33 @@ struct NoteListItem: View {
 }
 
 #Preview {
+    let sampleFriends = [
+        Friend(firstName: "Alice", lastName: "M"),
+        Friend(firstName: "Bob", lastName: "K"),
+        Friend(firstName: "Clara", lastName: "S"),
+        Friend(firstName: "Dan", lastName: "W"),
+        Friend(firstName: "Eva", lastName: "L"),
+    ]
+
     List {
         NoteListItem(note: Note(
             title: "A Walk by the River",
             date: .now,
-            message: "The sun was setting and the water reflected golden light across the path. I thought about how moments like these slip away so quietly."
+            message: "The sun was setting and the water reflected golden light across the path. I thought about how moments like these slip away so quietly.",
+            friends: Array(sampleFriends.prefix(2))
         ))
-        
+
         NoteListItem(note: Note(
             title: "Morning Coffee",
             date: .now.addingTimeInterval(-86400),
-            message: "Simple pleasures."
+            message: "Simple pleasures.",
+            friends: sampleFriends
+        ))
+
+        NoteListItem(note: Note(
+            title: "Quiet Evening",
+            date: .now.addingTimeInterval(-172800),
+            message: "Just me and a book."
         ))
     }
     .listStyle(.plain)

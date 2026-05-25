@@ -8,17 +8,6 @@
 import SwiftUI
 import SwiftData
 
-@Observable
-@MainActor
-final class RootViewModel {
-    var notes: [Note] = []
-    
-    func saveNote(title: String, message: String) {
-        let newNote = Note(title: title, date: Date.now, message: message)
-        notes.append(newNote)
-    }
-}
-
 struct RootView: View {
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \Note.date, order: .reverse) private var notes: [Note]
@@ -82,7 +71,7 @@ struct RootView: View {
                 }
             }
             .fullScreenCover(isPresented: $isEditorOpen) {
-                NoteEditor(
+                NoteEditorView(
                     onCancel: {
                         isEditorOpen = false
                     },
