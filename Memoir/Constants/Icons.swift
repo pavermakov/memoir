@@ -18,4 +18,6 @@ struct Icon {
     static let remove = "xmark"
     static let plus = "plus"
     static let camera = "camera.fill"
+    static let friends = "person.2"
+    static let edit = "pencil"
 }
