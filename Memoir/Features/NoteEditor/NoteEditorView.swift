@@ -1,5 +1,5 @@
 //
-//  NoteEditor.swift
+//  NoteEditorView.swift
 //  Memoir
 //
 //  Created by Pavel Ermakov on 21.05.26.
@@ -8,7 +8,7 @@
 import SwiftUI
 import PhotosUI
 
-struct NoteEditor: View {
+struct NoteEditorView: View {
     let onCancel: () -> Void
     let onSave: (Note) -> Void
     
@@ -106,5 +106,5 @@ struct NoteEditor: View {
 }
 
 #Preview {
-    NoteEditor(onCancel: {}, onSave: { _ in })
+    NoteEditorView(onCancel: {}, onSave: { _ in })
 }

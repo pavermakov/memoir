@@ -29,14 +29,22 @@ struct SelectedFriendsView: View {
                 HStack(spacing: 8) {
                     ForEach(selectedFriends) { friend in
                         HStack(spacing: 6) {
-                            Circle()
-                                .fill(Color.memoirGold.opacity(0.15))
-                                .frame(width: 24, height: 24)
-                                .overlay(
-                                    Text(friend.firstName.prefix(1).uppercased())
-                                        .font(.system(.caption2, design: .serif).weight(.medium))
-                                        .foregroundStyle(Color.memoirGold)
-                                )
+                            if let profileImage = friend.profileImage {
+                                profileImage
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 24, height: 24)
+                                    .clipShape(.circle)
+                            } else {
+                                Circle()
+                                    .fill(Color.memoirGold.opacity(0.15))
+                                    .frame(width: 24, height: 24)
+                                    .overlay(
+                                        Text(friend.firstName.prefix(1).uppercased())
+                                            .font(.system(.caption2, design: .serif).weight(.medium))
+                                            .foregroundStyle(Color.memoirGold)
+                                    )
+                            }
                             
                             Text(friend.firstName)
                                 .font(.system(.subheadline, design: .serif))
@@ -49,7 +57,7 @@ struct SelectedFriendsView: View {
                                     }
                                 }
                             } label: {
-                                Image(systemName: "xmark")
+                                Image(systemName: Icon.remove)
                                     .font(.system(size: 10, weight: .semibold))
                                     .foregroundStyle(Color.memoirInk.opacity(0.3))
                             }

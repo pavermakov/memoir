@@ -14,4 +14,8 @@ struct Icon {
     static let photo = "photo.fill"
     static let addPhotos = "photo.on.rectangle.angled"
     static let addPeople = "person.2.fill"
+    static let checkmark = "checkmark.circle.fill"
+    static let remove = "xmark"
+    static let plus = "plus"
+    static let camera = "camera.fill"
 }
