@@ -14,7 +14,7 @@ struct MemoryDatePicker: View {
     var body: some View {
         VStack(spacing: 0) {
             DatePicker(
-                "Select a date",
+                String(localized: "selectADate"),
                 selection: $date,
                 displayedComponents: .date
             )

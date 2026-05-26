@@ -15,10 +15,10 @@ struct MemoryTitleField: View {
     @State private var isDatePickerPresented = false
     
     private static let availablePlaceholders = [
-        "Give it a title...",
-        "What's on your mind?",
-        "Name this moment…",
-        "A thought, a memory…"
+        String(localized: "giveItATitle"),
+        String(localized: "whatsOnYourMind"),
+        String(localized: "nameThisMoment"),
+        String(localized: "aThoughtAMemory"),
     ]
     
     init(title: Binding<String>, date: Binding<Date>) {
@@ -37,7 +37,7 @@ struct MemoryTitleField: View {
         VStack(alignment: .leading, spacing: 6) {
             HStack {
                 HStack(spacing: 2) {
-                    Text("Title")
+                    Text("title")
                         .font(.system(.caption, design: .serif))
                         .foregroundStyle(Color.memoirInk.opacity(0.5))
                     

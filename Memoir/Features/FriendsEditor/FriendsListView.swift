@@ -62,18 +62,18 @@ struct FriendsListView: View {
                 }
             }
             .background(Color.memoirPaper)
-            .navigationTitle("Friends")
+            .navigationTitle(String(localized: "friends"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Button("Done") {
+                    Button(String(localized: "done")) {
                         isPresented = false
                     }
                     .bold()
                 }
                 
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Add", systemImage: Icon.plus) {
+                    Button(String(localized: "add"), systemImage: Icon.plus) {
                         isAddingFriend = true
                     }
                     .foregroundStyle(Color.memoirGold)

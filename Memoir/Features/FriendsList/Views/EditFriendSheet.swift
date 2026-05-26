@@ -68,7 +68,7 @@ struct EditFriendSheet: View {
                 }
                 
                 VStack(spacing: 12) {
-                    TextField("First name", text: $firstName)
+                    TextField(String(localized: "firstName"), text: $firstName)
                         .font(.system(.body, design: .serif))
                         .foregroundStyle(Color.memoirInk)
                         .padding(.vertical, 14)
@@ -82,7 +82,7 @@ struct EditFriendSheet: View {
                                 .strokeBorder(Color.memoirInk.opacity(0.12), lineWidth: 1)
                         )
                     
-                    TextField("Last name", text: $lastName)
+                    TextField(String(localized: "lastName"), text: $lastName)
                         .font(.system(.body, design: .serif))
                         .foregroundStyle(Color.memoirInk)
                         .padding(.vertical, 14)
@@ -101,17 +101,17 @@ struct EditFriendSheet: View {
             }
             .padding(24)
             .background(Color.memoirPaper)
-            .navigationTitle("Edit Friend")
+            .navigationTitle(String(localized: "editFriend"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Button("Cancel") {
+                    Button(String(localized: "cancel")) {
                         dismiss()
                     }
                 }
                 
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Save") {
+                    Button(String(localized: "save")) {
                         friend.firstName = firstName.trimmingCharacters(in: .whitespaces)
                         friend.lastName = lastName.trimmingCharacters(in: .whitespaces)
                         friend.profileImageData = profileImageData

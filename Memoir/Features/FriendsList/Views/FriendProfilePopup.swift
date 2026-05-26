@@ -38,7 +38,7 @@ struct FriendProfilePopup: View {
                     .font(.system(.title3, design: .serif).weight(.medium))
                     .foregroundStyle(Color.memoirInk)
                 
-                Button("Edit", systemImage: Icon.edit) {
+                Button(String(localized: "edit"), systemImage: Icon.edit) {
                     isEditing = true
                 }
                 .font(.system(.subheadline, design: .serif))
@@ -51,7 +51,7 @@ struct FriendProfilePopup: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Done") {
+                    Button(String(localized: "done")) {
                         dismiss()
                     }
                     .bold()

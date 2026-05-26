@@ -57,11 +57,11 @@ struct FriendsTabView: View {
                 }
             }
             .background(Color.memoirPaper)
-            .navigationTitle(friends.isEmpty ? "" : "Friends")
+            .navigationTitle(friends.isEmpty ? "" : String(localized: "friends"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Add Friend", systemImage: Icon.plus) {
+                    Button(String(localized: "addFriend"), systemImage: Icon.plus) {
                         isAddingFriend = true
                     }
                     .foregroundStyle(Color.memoirGold)

@@ -16,7 +16,7 @@ struct AddPeopleButton: View {
                 Image(systemName: Icon.addPeople)
                     .font(.system(size: 18))
                 
-                Text("Add People")
+                Text("addPeople")
                     .font(.system(size: 15, weight: .medium, design: .serif))
             }
             .foregroundStyle(Color.memoirGold)

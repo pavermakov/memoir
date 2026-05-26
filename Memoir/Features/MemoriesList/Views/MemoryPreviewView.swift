@@ -61,7 +61,7 @@ struct MemoryPreviewView: View {
                     
                     if let friends = memory.friends, !friends.isEmpty {
                         VStack(alignment: .leading, spacing: 8) {
-                            Text("With")
+                            Text("with")
                                 .font(.system(.caption, design: .serif))
                                 .foregroundStyle(Color.memoirInk.opacity(0.4))
                             
@@ -86,12 +86,12 @@ struct MemoryPreviewView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Button("Done", action: onDismiss)
+                    Button(String(localized: "done"), action: onDismiss)
                         .bold()
                 }
                 
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Edit", systemImage: Icon.edit) {
+                    Button(String(localized: "edit"), systemImage: Icon.edit) {
                         isEditing = true
                     }
                     .foregroundStyle(Color.memoirGold)

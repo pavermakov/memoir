@@ -14,11 +14,11 @@ struct FriendsEditorEmptyView: View {
                 .font(.system(size: 40))
                 .foregroundStyle(Color.memoirGold.opacity(0.6))
             
-            Text("No friends yet")
+            Text("noFriendsYet")
                 .font(.system(.title3, design: .serif).weight(.medium))
                 .foregroundStyle(Color.memoirInk)
             
-            Text("Friends you add will appear here.")
+            Text("friendsYouAddWillAppearHere")
                 .font(.system(.subheadline, design: .serif))
                 .foregroundStyle(Color.memoirInk.opacity(0.4))
         }

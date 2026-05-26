@@ -56,7 +56,7 @@ struct AddFriendSheet: View {
                 }
                 
                 VStack(spacing: 12) {
-                    TextField("First name", text: $firstName)
+                    TextField(String(localized: "firstName"), text: $firstName)
                         .font(.system(.body, design: .serif))
                         .foregroundStyle(Color.memoirInk)
                         .padding(.vertical, 14)
@@ -70,7 +70,7 @@ struct AddFriendSheet: View {
                                 .strokeBorder(Color.memoirInk.opacity(0.12), lineWidth: 1)
                         )
                     
-                    TextField("Last name", text: $lastName)
+                    TextField(String(localized: "lastName"), text: $lastName)
                         .font(.system(.body, design: .serif))
                         .foregroundStyle(Color.memoirInk)
                         .padding(.vertical, 14)
@@ -89,17 +89,17 @@ struct AddFriendSheet: View {
             }
             .padding(24)
             .background(Color.memoirPaper)
-            .navigationTitle("New Friend")
+            .navigationTitle(String(localized: "newFriend"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Button("Cancel") {
+                    Button(String(localized: "cancel")) {
                         isPresented = false
                     }
                 }
                 
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Add") {
+                    Button(String(localized: "add")) {
                         let friend = Friend(
                             firstName: firstName.trimmingCharacters(in: .whitespaces),
                             lastName: lastName.trimmingCharacters(in: .whitespaces),

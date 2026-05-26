@@ -14,7 +14,7 @@ struct MemoryMessageField: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             HStack(spacing: 2) {
-                Text("Message")
+                Text("message")
                     .font(.system(.caption, design: .serif))
                     .foregroundStyle(Color.memoirInk.opacity(0.5))
                 
@@ -26,7 +26,7 @@ struct MemoryMessageField: View {
             
             ZStack(alignment: .topLeading) {
                 if text.isEmpty {
-                    Text("Start writing...")
+                    Text("startWriting")
                         .font(.system(.body, design: .serif))
                         .foregroundStyle(Color.memoirInk.opacity(0.3))
                         .padding(.top, 14)
