@@ -12,37 +12,41 @@ struct NotesListView: View {
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \Note.date, order: .reverse) private var notes: [Note]
     @State private var isEditorOpen = false
+    @State private var selectedNote: Note?
     
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
                 if notes.isEmpty {
-                    VStack(spacing: 0) {
-                        Spacer()
-                        
-                        VStack(spacing: 16) {
-                            Image(systemName: Icon.note)
-                                .font(.system(size: 40))
-                                .foregroundStyle(Color.memoirGold.opacity(0.6))
-                            
+                    ContentUnavailableView {
+                        Label {
                             Text("No notes yet")
-                                .font(.system(.title3, design: .serif).weight(.medium))
+                                .font(.system(.title3, design: .serif))
+                                .fontWeight(.medium)
                                 .foregroundStyle(Color.memoirInk)
-                            
-                            Text("Add a new note to get started.")
-                                .font(.system(.subheadline, design: .serif))
-                                .foregroundStyle(Color.memoirInk.opacity(0.4))
+                        } icon: {
+                            Image(systemName: Icon.note)
+                                .foregroundStyle(Color.memoirGold.opacity(0.6))
                         }
-                        .frame(maxWidth: .infinity)
-                        
-                        Spacer()
+                    } description: {
+                        Text("Add a new note to get started.")
+                            .font(.system(.subheadline, design: .serif))
+                            .foregroundStyle(Color.memoirInk.opacity(0.4))
                     }
                 } else {
                     List {
                         ForEach(notes) { note in
-                            NoteListItem(note: note)
+                            Button {
+                                selectedNote = note
+                            } label: {
+                                NoteListItem(note: note)
+                            }
+                            .buttonStyle(.plain)
                         }
                         .onDelete(perform: deleteNotes)
+                        .listRowSeparator(.hidden)
+                        .listRowBackground(Color.memoirPaper)
+                        .listRowInsets(EdgeInsets(top: 4, leading: 16, bottom: 4, trailing: 16))
                     }
                     .listStyle(.plain)
                     .scrollContentBackground(.hidden)
@@ -68,6 +72,11 @@ struct NotesListView: View {
                         modelContext.insert(note)
                     }
                 )
+            }
+            .fullScreenCover(item: $selectedNote) { note in
+                NotePreviewView(note: note) {
+                    selectedNote = nil
+                }
             }
         }
     }

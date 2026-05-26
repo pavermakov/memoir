@@ -27,7 +27,7 @@ struct NoteDatePicker: View {
         }
         .background(Color.memoirPaper)
         .presentationDetents([.height(420)])
-        .presentationDragIndicator(.visible)
+        .presentationDragIndicator(.hidden)
         .onChange(of: date) { _, newValue in
             isPresented = false
         }

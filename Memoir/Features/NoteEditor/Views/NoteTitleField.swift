@@ -30,7 +30,7 @@ struct NoteTitleField: View {
     private var promptText: Text {
         Text(placeholder)
             .font(.system(.body, design: .serif))
-            .foregroundColor(Color.memoirInk.opacity(0.3))
+            .foregroundStyle(Color.memoirInk.opacity(0.3))
     }
     
     var body: some View {
@@ -62,7 +62,7 @@ struct NoteTitleField: View {
             .padding(.horizontal, 4)
             
             TextField("", text: $title, prompt: promptText, axis: .vertical)
-                .font(.system(.title2, design: .serif).weight(.medium))
+                .font(.system(.title2, design: .serif).weight(.bold))
                 .foregroundStyle(Color.memoirInk)
                 .tint(Color.memoirGold)
                 .focused($isFocused)

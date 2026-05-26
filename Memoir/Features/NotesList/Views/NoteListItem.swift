@@ -11,32 +11,31 @@ struct NoteListItem: View {
     let note: Note
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack(spacing: 0) {
-                Text(note.title)
-                    .font(.system(.headline, design: .serif))
-                    .foregroundStyle(Color.memoirInk)
-                    .lineLimit(1)
-                
-                Spacer()
-                
-                Text(note.date, format: .dateTime.month(.abbreviated).day())
-                    .font(.system(.caption, design: .serif))
-                    .foregroundStyle(Color.memoirGold)
-            }
+        VStack(alignment: .leading, spacing: 12) {
+            Text(note.date, format: .dateTime.month(.abbreviated).day().year())
+                .font(.system(.caption, design: .serif))
+                .foregroundStyle(Color.memoirGold)
             
-            Text(note.message)
-                .font(.system(.subheadline, design: .serif))
-                .foregroundStyle(Color.memoirInk.opacity(0.5))
+            Text(note.title)
+                .font(.system(.headline, design: .serif))
+                .foregroundStyle(Color.memoirInk)
                 .lineLimit(2)
             
             if let friends = note.friends, !friends.isEmpty {
                 FriendAvatarStack(friends: friends)
             }
         }
-        .padding(.vertical, 4)
-        .listRowBackground(Color.clear)
-        .listRowSeparatorTint(Color.memoirInk.opacity(0.08))
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding()
+        .background(Color.memoirInk.opacity(0.03))
+        .clipShape(.rect(cornerRadius: 12))
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .strokeBorder(Color.memoirInk.opacity(0.08), lineWidth: 1)
+        )
+//        .listRowSeparator(.hidden)
+//        .listRowBackground(Color.memoirPaper)
+//        .listRowInsets(EdgeInsets(top: 4, leading: 16, bottom: 4, trailing: 16))
     }
 }
 
@@ -53,7 +52,7 @@ struct NoteListItem: View {
         NoteListItem(note: Note(
             title: "A Walk by the River",
             date: .now,
-            message: "The sun was setting and the water reflected golden light across the path. I thought about how moments like these slip away so quietly.",
+            message: "The sun was setting and the water reflected golden light across the path.",
             friends: Array(sampleFriends.prefix(2))
         ))
 
@@ -71,6 +70,6 @@ struct NoteListItem: View {
         ))
     }
     .listStyle(.plain)
-    .background(Color.memoirPaper)
     .scrollContentBackground(.hidden)
+    .background(Color.memoirPaper)
 }
