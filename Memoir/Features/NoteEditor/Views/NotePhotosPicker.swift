@@ -21,7 +21,7 @@ struct NotePhotosPicker: View {
                             .font(.system(size: 14))
                             .foregroundStyle(Color.memoirGold)
                         
-                        Text("\(selectedPhotos.count) photo\(selectedPhotos.count == 1 ? "" : "s") selected")
+                        Text("^[\(selectedPhotos.count) photo](inflect:true) selected")
                             .font(.system(.subheadline, design: .serif))
                             .foregroundStyle(Color.memoirInk.opacity(0.6))
                     }

@@ -39,9 +39,14 @@ struct FriendAvatarStack: View {
     }
 }
 
-private struct FriendAvatarCircle: View {
-    let friend: Friend
-    private let size: CGFloat = 24
+struct FriendAvatarCircle: View {
+    private let friend: Friend
+    private let size: CGFloat
+    
+    init(friend: Friend, size: CGFloat = 24) {
+        self.friend = friend
+        self.size = size
+    }
 
     var body: some View {
         Group {

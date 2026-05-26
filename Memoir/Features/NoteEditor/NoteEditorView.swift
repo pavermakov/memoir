@@ -9,20 +9,33 @@ import SwiftUI
 import PhotosUI
 
 struct NoteEditorView: View {
+    private let note: Note?
     let onCancel: () -> Void
     let onSave: (Note) -> Void
     
-    @State private var title = ""
-    @State private var message = ""
-    @State private var date: Date = .now
+    @State private var title: String
+    @State private var message: String
+    @State private var date: Date
     @State private var selectedItems: [PhotosPickerItem] = []
     @State private var selectedPhotos: [NotePhoto] = []
     @State private var isFriendsEditorVisible = false
-    @State private var selectedFriends: [Friend] = []
+    @State private var selectedFriends: [Friend]
     @FocusState private var focusField: NoteField?
+    
+    private var isEditing: Bool { note != nil }
     
     private var isNoteReady: Bool {
         !title.isEmpty && !message.isEmpty
+    }
+    
+    init(note: Note? = nil, onCancel: @escaping () -> Void, onSave: @escaping (Note) -> Void) {
+        self.note = note
+        self.onCancel = onCancel
+        self.onSave = onSave
+        _title = State(initialValue: note?.title ?? "")
+        _message = State(initialValue: note?.message ?? "")
+        _date = State(initialValue: note?.date ?? .now)
+        _selectedFriends = State(initialValue: note?.friends ?? [])
     }
     
     func loadSelectedPhotos(_ items: [PhotosPickerItem]) async {
@@ -41,6 +54,24 @@ struct NoteEditorView: View {
                let image = try? await item.loadTransferable(type: Image.self) {
                 selectedPhotos.append(NotePhoto(id: id, image: image))
             }
+        }
+    }
+    
+    private func saveNote() {
+        if let note {
+            note.title = title
+            note.message = message
+            note.date = date
+            note.friends = selectedFriends.isEmpty ? nil : selectedFriends
+            onSave(note)
+        } else {
+            let newNote = Note(
+                title: title,
+                date: date,
+                message: message,
+                friends: selectedFriends.isEmpty ? nil : selectedFriends
+            )
+            onSave(newNote)
         }
     }
     
@@ -81,24 +112,13 @@ struct NoteEditorView: View {
             .contentMargins(24, for: .scrollContent)
             .background(Color.memoirPaper)
             .scrollDismissesKeyboard(.immediately)
-            .onTapGesture {
-                focusField = nil
-            }
-            .navigationTitle("Add new note")
+            .navigationTitle(isEditing ? "Edit note" : "Add new note")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 NoteEditorToolbar(
                     isSaveButtonEnabled: isNoteReady,
                     onCancel: onCancel,
-                    onSave: {
-                        let note = Note(
-                            title: title,
-                            date: date,
-                            message: message,
-                            friends: selectedFriends.isEmpty ? nil : selectedFriends
-                        )
-                        onSave(note)
-                    }
+                    onSave: saveNote
                 )
             }
         }
