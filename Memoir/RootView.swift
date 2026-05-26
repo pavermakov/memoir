@@ -9,12 +9,12 @@ import SwiftUI
 import SwiftData
 
 struct RootView: View {
-    @State private var selectedTab: AppTab = .notes
+    @State private var selectedTab: AppTab = .memories
     
     var body: some View {
         TabView(selection: $selectedTab) {
-            Tab("Notes", systemImage: Icon.note, value: .notes) {
-                NotesListView()
+            Tab("Memories", systemImage: Icon.memory, value: .memories) {
+                MemoriesListView()
             }
             
             Tab("Friends", systemImage: Icon.friends, value: .friends) {
@@ -27,5 +27,5 @@ struct RootView: View {
 
 #Preview {
     RootView()
-        .modelContainer(for: [Note.self, Friend.self], inMemory: true)
+        .modelContainer(for: [Memory.self, Friend.self], inMemory: true)
 }

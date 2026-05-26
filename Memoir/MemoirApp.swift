@@ -14,6 +14,6 @@ struct MemoirApp: App {
         WindowGroup {
             RootView()
         }
-        .modelContainer(for: [Note.self, Friend.self, NotePhoto.self])
+        .modelContainer(for: [Memory.self, Friend.self, MemoryPhoto.self])
     }
 }

@@ -7,34 +7,34 @@
 
 import SwiftUI
 
-struct NotePreviewView: View {
-    let note: Note
+struct MemoryPreviewView: View {
+    let memory: Memory
     let onDismiss: () -> Void
     
     @State private var isEditing = false
-    @State private var fullScreenPhoto: NotePhoto?
+    @State private var fullScreenPhoto: MemoryPhoto?
     
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 12) {
                     VStack(alignment: .leading, spacing: 8) {
-                        Text(note.date, format: .dateTime.month(.wide).day().year())
+                        Text(memory.date, format: .dateTime.month(.wide).day().year())
                             .font(.system(.subheadline, design: .serif))
                             .foregroundStyle(Color.memoirGold)
                         
-                        Text(note.title)
+                        Text(memory.title)
                             .font(.system(.title, design: .serif).weight(.medium))
                             .foregroundStyle(Color.memoirInk)
                         
-                        Text(note.message)
+                        Text(memory.message)
                             .font(.system(.body, design: .serif))
                             .foregroundStyle(Color.memoirInk.opacity(0.8))
                             .lineSpacing(6)
                     }
                     .padding(.horizontal, 24)
                     
-                    if let photos = note.photos, !photos.isEmpty {
+                    if let photos = memory.photos, !photos.isEmpty {
                         ScrollView(.horizontal) {
                             HStack(spacing: 12) {
                                 ForEach(photos) { photo in
@@ -59,7 +59,7 @@ struct NotePreviewView: View {
                         .contentMargins(.horizontal, 24, for: .scrollContent)
                     }
                     
-                    if let friends = note.friends, !friends.isEmpty {
+                    if let friends = memory.friends, !friends.isEmpty {
                         VStack(alignment: .leading, spacing: 8) {
                             Text("With")
                                 .font(.system(.caption, design: .serif))
@@ -98,8 +98,8 @@ struct NotePreviewView: View {
                 }
             }
             .fullScreenCover(isPresented: $isEditing) {
-                NoteEditorView(
-                    note: note,
+                MemoryEditorView(
+                    memory: memory,
                     onCancel: {
                         isEditing = false
                     },

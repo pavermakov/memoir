@@ -8,42 +8,42 @@
 import SwiftUI
 import SwiftData
 
-struct NotesListView: View {
+struct MemoriesListView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query(sort: \Note.date, order: .reverse) private var notes: [Note]
+    @Query(sort: \Memory.date, order: .reverse) private var memories: [Memory]
     @State private var isEditorOpen = false
-    @State private var selectedNote: Note?
+    @State private var selectedMemory: Memory?
     
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                if notes.isEmpty {
+                if memories.isEmpty {
                     ContentUnavailableView {
                         Label {
-                            Text("No notes yet")
+                            Text("No memories yet")
                                 .font(.system(.title3, design: .serif))
                                 .fontWeight(.medium)
                                 .foregroundStyle(Color.memoirInk)
                         } icon: {
-                            Image(systemName: Icon.note)
+                            Image(systemName: Icon.memory)
                                 .foregroundStyle(Color.memoirGold.opacity(0.6))
                         }
                     } description: {
-                        Text("Add a new note to get started.")
+                        Text("Add a new memory to get started.")
                             .font(.system(.subheadline, design: .serif))
                             .foregroundStyle(Color.memoirInk.opacity(0.4))
                     }
                 } else {
                     List {
-                        ForEach(notes) { note in
+                        ForEach(memories) { memory in
                             Button {
-                                selectedNote = note
+                                selectedMemory = memory
                             } label: {
-                                NoteListItem(note: note)
+                                MemoryListItem(memory: memory)
                             }
                             .buttonStyle(.plain)
                         }
-                        .onDelete(perform: deleteNotes)
+                        .onDelete(perform: deleteMemories)
                         .listRowSeparator(.hidden)
                         .listRowBackground(Color.memoirPaper)
                         .listRowInsets(EdgeInsets(top: 4, leading: 16, bottom: 4, trailing: 16))
@@ -54,41 +54,41 @@ struct NotesListView: View {
             }
             .background(Color.memoirPaper)
             .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle(notes.isEmpty ? "" : "Notes")
+            .navigationTitle(memories.isEmpty ? "" : "Memories")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Add Note", systemImage: Icon.addNote) {
+                    Button("Add Memory", systemImage: Icon.addMemory) {
                         isEditorOpen = true
                     }
                 }
             }
             .fullScreenCover(isPresented: $isEditorOpen) {
-                NoteEditorView(
+                MemoryEditorView(
                     onCancel: {
                         isEditorOpen = false
                     },
-                    onSave: { note in
+                    onSave: { memory in
                         isEditorOpen = false
-                        modelContext.insert(note)
+                        modelContext.insert(memory)
                     }
                 )
             }
-            .fullScreenCover(item: $selectedNote) { note in
-                NotePreviewView(note: note) {
-                    selectedNote = nil
+            .fullScreenCover(item: $selectedMemory) { memory in
+                MemoryPreviewView(memory: memory) {
+                    selectedMemory = nil
                 }
             }
         }
     }
     
-    private func deleteNotes(_ indexSet: IndexSet) {
+    private func deleteMemories(_ indexSet: IndexSet) {
         for index in indexSet {
-            modelContext.delete(notes[index])
+            modelContext.delete(memories[index])
         }
     }
 }
 
 #Preview {
-    NotesListView()
-        .modelContainer(for: [Note.self, Friend.self], inMemory: true)
+    MemoriesListView()
+        .modelContainer(for: [Memory.self, Friend.self], inMemory: true)
 }

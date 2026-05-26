@@ -8,10 +8,10 @@
 import SwiftUI
 import PhotosUI
 
-struct NoteEditorView: View {
-    private let note: Note?
+struct MemoryEditorView: View {
+    private let memory: Memory?
     let onCancel: () -> Void
-    let onSave: (Note) -> Void
+    let onSave: (Memory) -> Void
     
     @State private var title: String
     @State private var message: String
@@ -20,23 +20,23 @@ struct NoteEditorView: View {
     @State private var selectedPhotoData: [Data]
     @State private var isFriendsEditorVisible = false
     @State private var selectedFriends: [Friend]
-    @FocusState private var focusField: NoteField?
+    @FocusState private var focusField: MemoryField?
     
-    private var isEditing: Bool { note != nil }
+    private var isEditing: Bool { memory != nil }
     
-    private var isNoteReady: Bool {
+    private var isMemoryReady: Bool {
         !title.isEmpty && !message.isEmpty
     }
     
-    init(note: Note? = nil, onCancel: @escaping () -> Void, onSave: @escaping (Note) -> Void) {
-        self.note = note
+    init(memory: Memory? = nil, onCancel: @escaping () -> Void, onSave: @escaping (Memory) -> Void) {
+        self.memory = memory
         self.onCancel = onCancel
         self.onSave = onSave
-        _title = State(initialValue: note?.title ?? "")
-        _message = State(initialValue: note?.message ?? "")
-        _date = State(initialValue: note?.date ?? .now)
-        _selectedFriends = State(initialValue: note?.friends ?? [])
-        _selectedPhotoData = State(initialValue: note?.photos?.map(\.photoData) ?? [])
+        _title = State(initialValue: memory?.title ?? "")
+        _message = State(initialValue: memory?.message ?? "")
+        _date = State(initialValue: memory?.date ?? .now)
+        _selectedFriends = State(initialValue: memory?.friends ?? [])
+        _selectedPhotoData = State(initialValue: memory?.photos?.map(\.photoData) ?? [])
     }
     
     func loadSelectedPhotos(_ items: [PhotosPickerItem]) async {
@@ -51,38 +51,38 @@ struct NoteEditorView: View {
         selectedPhotoData = newData
     }
     
-    private func saveNote() {
-        let photos = selectedPhotoData.isEmpty ? nil : selectedPhotoData.map { NotePhoto(photoData: $0) }
+    private func saveMemory() {
+        let photos = selectedPhotoData.isEmpty ? nil : selectedPhotoData.map { MemoryPhoto(photoData: $0) }
         
-        if let note {
-            note.title = title
-            note.message = message
-            note.date = date
-            note.friends = selectedFriends.isEmpty ? nil : selectedFriends
-            note.photos = photos
-            onSave(note)
+        if let memory {
+            memory.title = title
+            memory.message = message
+            memory.date = date
+            memory.friends = selectedFriends.isEmpty ? nil : selectedFriends
+            memory.photos = photos
+            onSave(memory)
         } else {
-            let newNote = Note(
+            let newMemory = Memory(
                 title: title,
                 date: date,
                 message: message,
                 friends: selectedFriends.isEmpty ? nil : selectedFriends,
                 photos: photos
             )
-            onSave(newNote)
+            onSave(newMemory)
         }
     }
     
     var body: some View {
         NavigationStack {
             ScrollView {
-                NoteTitleField(title: $title, date: $date)
+                MemoryTitleField(title: $title, date: $date)
                     .focused($focusField, equals: .title)
                 
-                NoteMessageField(text: $message)
+                MemoryMessageField(text: $message)
                     .focused($focusField, equals: .message)
                 
-                NotePhotosPicker(
+                MemoryPhotosPicker(
                     selectedItems: $selectedItems,
                     selectedPhotoData: $selectedPhotoData
                 )
@@ -110,13 +110,13 @@ struct NoteEditorView: View {
             .contentMargins(24, for: .scrollContent)
             .background(Color.memoirPaper)
             .scrollDismissesKeyboard(.immediately)
-            .navigationTitle(isEditing ? "Edit note" : "Add new note")
+            .navigationTitle(isEditing ? "Edit memory" : "Add new memory")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                NoteEditorToolbar(
-                    isSaveButtonEnabled: isNoteReady,
+                MemoryEditorToolbar(
+                    isSaveButtonEnabled: isMemoryReady,
                     onCancel: onCancel,
-                    onSave: saveNote
+                    onSave: saveMemory
                 )
             }
         }
@@ -124,5 +124,5 @@ struct NoteEditorView: View {
 }
 
 #Preview {
-    NoteEditorView(onCancel: {}, onSave: { _ in })
+    MemoryEditorView(onCancel: {}, onSave: { _ in })
 }

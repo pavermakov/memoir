@@ -8,6 +8,6 @@
 import Foundation
 
 enum AppTab: Hashable {
-    case notes
+    case memories
     case friends
 }

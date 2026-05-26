@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NoteEditorToolbar: ToolbarContent {
+struct MemoryEditorToolbar: ToolbarContent {
     let isSaveButtonEnabled: Bool
     let onCancel: () -> Void
     let onSave: () -> Void

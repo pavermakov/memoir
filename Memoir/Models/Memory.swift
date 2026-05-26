@@ -9,14 +9,14 @@ import SwiftData
 import Foundation
 
 @Model
-final class Note {
+final class Memory {
     var title: String
     var date: Date
     var message: String
     var friends: [Friend]?
-    @Relationship(inverse: \NotePhoto.note) var photos: [NotePhoto]?
+    @Relationship(inverse: \MemoryPhoto.memory) var photos: [MemoryPhoto]?
     
-    init(title: String, date: Date, message: String, friends: [Friend]? = nil, photos: [NotePhoto]? = nil) {
+    init(title: String, date: Date, message: String, friends: [Friend]? = nil, photos: [MemoryPhoto]? = nil) {
         self.title = title
         self.date = date
         self.message = message

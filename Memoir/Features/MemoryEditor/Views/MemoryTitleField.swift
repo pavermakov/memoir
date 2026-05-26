@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NoteTitleField: View {
+struct MemoryTitleField: View {
     @Binding var title: String
     @Binding var date: Date
     @FocusState private var isFocused: Bool
@@ -83,15 +83,15 @@ struct NoteTitleField: View {
                 .animation(.easeInOut(duration: 0.2), value: isFocused)
         }
         .sheet(isPresented: $isDatePickerPresented) {
-            NoteDatePicker(date: $date, isPresented: $isDatePickerPresented)
+            MemoryDatePicker(date: $date, isPresented: $isDatePickerPresented)
         }
     }
 }
 
 #Preview {
     VStack(spacing: 32) {
-        NoteTitleField(title: .constant(""), date: .constant(.now))
-        NoteTitleField(title: .constant("My First Memoir"), date: .constant(.now))
+        MemoryTitleField(title: .constant(""), date: .constant(.now))
+        MemoryTitleField(title: .constant("My First Memoir"), date: .constant(.now))
     }
     .padding(24)
     .background(Color.memoirPaper)
