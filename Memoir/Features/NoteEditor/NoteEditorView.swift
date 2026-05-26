@@ -17,7 +17,7 @@ struct NoteEditorView: View {
     @State private var message: String
     @State private var date: Date
     @State private var selectedItems: [PhotosPickerItem] = []
-    @State private var selectedPhotos: [NotePhoto] = []
+    @State private var selectedPhotoData: [Data]
     @State private var isFriendsEditorVisible = false
     @State private var selectedFriends: [Friend]
     @FocusState private var focusField: NoteField?
@@ -36,40 +36,38 @@ struct NoteEditorView: View {
         _message = State(initialValue: note?.message ?? "")
         _date = State(initialValue: note?.date ?? .now)
         _selectedFriends = State(initialValue: note?.friends ?? [])
+        _selectedPhotoData = State(initialValue: note?.photos?.map(\.photoData) ?? [])
     }
     
     func loadSelectedPhotos(_ items: [PhotosPickerItem]) async {
-        let newItemIDs: Set<String> = Set(items.compactMap(\.itemIdentifier))
-        let loadedIDs: Set<String> = Set(selectedPhotos.map(\.id))
-
-        selectedPhotos.removeAll { !newItemIDs.contains($0.id) }
+        var newData: [Data] = []
         
-        let newItems: [PhotosPickerItem] = items.filter { item in
-            guard let id = item.itemIdentifier else { return false }
-            return !loadedIDs.contains(id)
-        }
-        
-        for item in newItems {
-            if let id = item.itemIdentifier,
-               let image = try? await item.loadTransferable(type: Image.self) {
-                selectedPhotos.append(NotePhoto(id: id, image: image))
+        for item in items {
+            if let data = try? await item.loadTransferable(type: Data.self) {
+                newData.append(data)
             }
         }
+        
+        selectedPhotoData = newData
     }
     
     private func saveNote() {
+        let photos = selectedPhotoData.isEmpty ? nil : selectedPhotoData.map { NotePhoto(photoData: $0) }
+        
         if let note {
             note.title = title
             note.message = message
             note.date = date
             note.friends = selectedFriends.isEmpty ? nil : selectedFriends
+            note.photos = photos
             onSave(note)
         } else {
             let newNote = Note(
                 title: title,
                 date: date,
                 message: message,
-                friends: selectedFriends.isEmpty ? nil : selectedFriends
+                friends: selectedFriends.isEmpty ? nil : selectedFriends,
+                photos: photos
             )
             onSave(newNote)
         }
@@ -86,7 +84,7 @@ struct NoteEditorView: View {
                 
                 NotePhotosPicker(
                     selectedItems: $selectedItems,
-                    selectedPhotos: $selectedPhotos
+                    selectedPhotoData: $selectedPhotoData
                 )
                 .onChange(of: selectedItems) { _, newValue in
                     Task {
