@@ -13,11 +13,11 @@ struct RootView: View {
     
     var body: some View {
         TabView(selection: $selectedTab) {
-            Tab("Memories", systemImage: Icon.memory, value: .memories) {
+            Tab(String(localized: "memories"), systemImage: Icon.memory, value: .memories) {
                 MemoriesListView()
             }
             
-            Tab("Friends", systemImage: Icon.friends, value: .friends) {
+            Tab(String(localized: "friends"), systemImage: Icon.friends, value: .friends) {
                 FriendsTabView()
             }
         }

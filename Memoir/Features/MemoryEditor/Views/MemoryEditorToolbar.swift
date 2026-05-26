@@ -14,11 +14,11 @@ struct MemoryEditorToolbar: ToolbarContent {
     
     var body: some ToolbarContent {
         ToolbarItem(placement: .topBarLeading) {
-            Button("Cancel", action: onCancel)
+            Button(String(localized: "cancel"), action: onCancel)
         }
         
         ToolbarItem(placement: .topBarTrailing) {
-            Button("Save", action: onSave)
+            Button(String(localized: "save"), action: onSave)
                 .fontWeight(.semibold)
                 .disabled(!isSaveButtonEnabled)
         }

@@ -18,7 +18,7 @@ struct SelectedFriendsView: View {
                     .font(.system(size: 14))
                     .foregroundStyle(Color.memoirGold)
                 
-                Text("\(selectedFriends.count) friend\(selectedFriends.count == 1 ? "" : "s")")
+                Text("friendCount \(selectedFriends.count)")
                     .font(.system(.subheadline, design: .serif))
                     .foregroundStyle(Color.memoirInk.opacity(0.6))
             }

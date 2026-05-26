@@ -32,7 +32,7 @@ struct FullScreenImageView: View {
                 )
         }
         .overlay(alignment: .topTrailing) {
-            Button("Close", systemImage: "xmark") {
+            Button(String(localized: "close"), systemImage: "xmark") {
                 onDismiss()
             }
             .labelStyle(.iconOnly)

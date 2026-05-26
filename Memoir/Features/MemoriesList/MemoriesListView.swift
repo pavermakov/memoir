@@ -20,7 +20,7 @@ struct MemoriesListView: View {
                 if memories.isEmpty {
                     ContentUnavailableView {
                         Label {
-                            Text("No memories yet")
+                            Text("noMemoriesYet")
                                 .font(.system(.title3, design: .serif))
                                 .fontWeight(.medium)
                                 .foregroundStyle(Color.memoirInk)
@@ -29,7 +29,7 @@ struct MemoriesListView: View {
                                 .foregroundStyle(Color.memoirGold.opacity(0.6))
                         }
                     } description: {
-                        Text("Add a new memory to get started.")
+                        Text("addNewMemoryToGetStarted")
                             .font(.system(.subheadline, design: .serif))
                             .foregroundStyle(Color.memoirInk.opacity(0.4))
                     }
@@ -54,10 +54,10 @@ struct MemoriesListView: View {
             }
             .background(Color.memoirPaper)
             .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle(memories.isEmpty ? "" : "Memories")
+            .navigationTitle(memories.isEmpty ? "" : String(localized: "memories"))
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Add Memory", systemImage: Icon.addMemory) {
+                    Button(String(localized: "addMemory"), systemImage: Icon.addMemory) {
                         isEditorOpen = true
                     }
                 }

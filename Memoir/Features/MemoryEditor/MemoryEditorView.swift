@@ -110,7 +110,7 @@ struct MemoryEditorView: View {
             .contentMargins(24, for: .scrollContent)
             .background(Color.memoirPaper)
             .scrollDismissesKeyboard(.immediately)
-            .navigationTitle(isEditing ? "Edit memory" : "Add new memory")
+            .navigationTitle(isEditing ? String(localized: "editMemory") : String(localized: "addNewMemory"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 MemoryEditorToolbar(

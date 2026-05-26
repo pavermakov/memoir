@@ -21,7 +21,7 @@ struct PhotosPickerButton: View {
                 Image(systemName: Icon.addPhotos)
                     .font(.system(size: 20))
                 
-                Text("Add Photos")
+                Text("addPhotos")
                     .font(.system(size: 15, weight: .medium, design: .serif))
             }
             .foregroundStyle(Color.memoirGold)

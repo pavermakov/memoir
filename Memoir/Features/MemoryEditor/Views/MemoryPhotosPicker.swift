@@ -30,7 +30,7 @@ struct MemoryPhotosPicker: View {
                             .font(.system(size: 14))
                             .foregroundStyle(Color.memoirGold)
                         
-                        Text("^[\(selectedPhotoData.count) photo](inflect:true) selected")
+                        Text("photosSelected \(selectedPhotoData.count)")
                             .font(.system(.subheadline, design: .serif))
                             .foregroundStyle(Color.memoirInk.opacity(0.6))
                     }
@@ -49,7 +49,7 @@ struct MemoryPhotosPicker: View {
                                             .clipShape(.rect(cornerRadius: 8))
                                     }
                                     
-                                    Button("Remove photo", systemImage: Icon.remove) {
+                                    Button(String(localized: "removePhoto"), systemImage: Icon.remove) {
                                         removePhoto(at: index)
                                     }
                                     .labelStyle(.iconOnly)
