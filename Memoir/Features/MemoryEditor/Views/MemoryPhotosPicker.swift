@@ -8,7 +8,7 @@
 import SwiftUI
 import PhotosUI
 
-struct NotePhotosPicker: View {
+struct MemoryPhotosPicker: View {
     @Binding var selectedItems: [PhotosPickerItem]
     @Binding var selectedPhotoData: [Data]
     

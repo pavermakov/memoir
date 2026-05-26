@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum NoteField {
+enum MemoryField {
     case title
     case message
 }

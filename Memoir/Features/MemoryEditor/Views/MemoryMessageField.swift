@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NoteMessageField: View {
+struct MemoryMessageField: View {
     @Binding var text: String
     @FocusState var isFocused: Bool
     
@@ -63,5 +63,5 @@ struct NoteMessageField: View {
 }
 
 #Preview {
-    NoteMessageField(text: .constant("Message"))
+    MemoryMessageField(text: .constant("Message"))
 }

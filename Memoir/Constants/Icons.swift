@@ -8,8 +8,8 @@
 import Foundation
 
 struct Icon {
-    static let note = "note.text"
-    static let addNote = "square.and.pencil"
+    static let memory = "note.text"
+    static let addMemory = "square.and.pencil"
     static let calendar = "calendar"
     static let photo = "photo.fill"
     static let addPhotos = "photo.on.rectangle.angled"

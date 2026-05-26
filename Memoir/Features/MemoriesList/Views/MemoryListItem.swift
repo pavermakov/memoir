@@ -7,32 +7,45 @@
 
 import SwiftUI
 
-struct NoteListItem: View {
-    let note: Note
+struct MemoryListItem: View {
+    let memory: Memory
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            if let firstPhoto = note.photos?.first, let image = firstPhoto.image {
+            if let firstPhoto = memory.photos?.first, let image = firstPhoto.image {
                 image
                     .resizable()
                     .scaledToFill()
                     .frame(height: 160)
                     .frame(maxWidth: .infinity)
                     .clipShape(.rect(cornerRadius: 8))
+                    .overlay(alignment: .topTrailing) {
+                        Text(memory.date, format: .dateTime.month(.abbreviated).day())
+                            .font(.system(.caption2, design: .serif))
+                            .bold()
+                            .foregroundStyle(Color.memoirInk)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 4)
+                            .background(.ultraThinMaterial)
+                            .clipShape(.capsule)
+                            .padding(8)
+                    }
             }
             
             VStack(alignment: .leading, spacing: 12) {
-                Text(note.date, format: .dateTime.month(.abbreviated).day().year())
-                    .font(.system(.caption, design: .serif))
-                    .foregroundStyle(Color.memoirGold)
+                if memory.photos?.first == nil {
+                    Text(memory.date, format: .dateTime.month(.abbreviated).day().year())
+                        .font(.system(.caption, design: .serif))
+                        .foregroundStyle(Color.memoirGold)
+                }
                 
-                Text(note.title)
+                Text(memory.title)
                     .font(.system(.subheadline, design: .serif))
                     .bold()
                     .foregroundStyle(Color.memoirInk)
                     .lineLimit(2)
                 
-                if let friends = note.friends, !friends.isEmpty {
+                if let friends = memory.friends, !friends.isEmpty {
                     FriendAvatarStack(friends: friends)
                 }
             }
@@ -45,9 +58,6 @@ struct NoteListItem: View {
             RoundedRectangle(cornerRadius: 12)
                 .strokeBorder(Color.memoirGold.opacity(0.2), lineWidth: 1)
         )
-//        .listRowSeparator(.hidden)
-//        .listRowBackground(Color.memoirPaper)
-//        .listRowInsets(EdgeInsets(top: 4, leading: 16, bottom: 4, trailing: 16))
     }
 }
 
@@ -61,21 +71,21 @@ struct NoteListItem: View {
     ]
 
     List {
-        NoteListItem(note: Note(
+        MemoryListItem(memory: Memory(
             title: "A Walk by the River",
             date: .now,
             message: "The sun was setting and the water reflected golden light across the path.",
             friends: Array(sampleFriends.prefix(2))
         ))
 
-        NoteListItem(note: Note(
+        MemoryListItem(memory: Memory(
             title: "Morning Coffee",
             date: .now.addingTimeInterval(-86400),
             message: "Simple pleasures.",
             friends: sampleFriends
         ))
 
-        NoteListItem(note: Note(
+        MemoryListItem(memory: Memory(
             title: "Quiet Evening",
             date: .now.addingTimeInterval(-172800),
             message: "Just me and a book."

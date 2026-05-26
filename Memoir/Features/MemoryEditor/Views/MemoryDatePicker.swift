@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NoteDatePicker: View {
+struct MemoryDatePicker: View {
     @Binding var date: Date
     @Binding var isPresented: Bool
     
@@ -35,5 +35,5 @@ struct NoteDatePicker: View {
 }
 
 #Preview {
-    NoteDatePicker(date: .constant(.now), isPresented: .constant(true))
+    MemoryDatePicker(date: .constant(.now), isPresented: .constant(true))
 }

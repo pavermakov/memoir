@@ -7,13 +7,13 @@ import SwiftData
 import SwiftUI
 
 @Model
-final class NotePhoto {
+final class MemoryPhoto {
     @Attribute(.externalStorage) var photoData: Data = Data()
-    var note: Note?
+    var memory: Memory?
     
-    init(photoData: Data, note: Note? = nil) {
+    init(photoData: Data, memory: Memory? = nil) {
         self.photoData = photoData
-        self.note = note
+        self.memory = memory
     }
     
     var image: Image? {
