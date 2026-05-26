@@ -14,11 +14,13 @@ final class Note {
     var date: Date
     var message: String
     var friends: [Friend]?
+    @Relationship(inverse: \NotePhoto.note) var photos: [NotePhoto]?
     
-    init(title: String, date: Date, message: String, friends: [Friend]? = nil) {
+    init(title: String, date: Date, message: String, friends: [Friend]? = nil, photos: [NotePhoto]? = nil) {
         self.title = title
         self.date = date
         self.message = message
         self.friends = friends
+        self.photos = photos
     }
 }

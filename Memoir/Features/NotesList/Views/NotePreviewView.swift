@@ -12,11 +12,12 @@ struct NotePreviewView: View {
     let onDismiss: () -> Void
     
     @State private var isEditing = false
+    @State private var fullScreenPhoto: NotePhoto?
     
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(alignment: .leading, spacing: 24) {
+                VStack(alignment: .leading, spacing: 12) {
                     VStack(alignment: .leading, spacing: 8) {
                         Text(note.date, format: .dateTime.month(.wide).day().year())
                             .font(.system(.subheadline, design: .serif))
@@ -31,8 +32,32 @@ struct NotePreviewView: View {
                             .foregroundStyle(Color.memoirInk.opacity(0.8))
                             .lineSpacing(6)
                     }
+                    .padding(.horizontal, 24)
                     
-                    
+                    if let photos = note.photos, !photos.isEmpty {
+                        ScrollView(.horizontal) {
+                            HStack(spacing: 12) {
+                                ForEach(photos) { photo in
+                                    if let image = photo.image {
+                                        Button {
+                                            fullScreenPhoto = photo
+                                        } label: {
+                                            image
+                                                .resizable()
+                                                .scaledToFill()
+                                                .frame(width: 200, height: 200)
+                                                .clipShape(.rect(cornerRadius: 12))
+                                        }
+                                        .buttonStyle(.plain)
+                                    }
+                                }
+                            }
+                            .scrollTargetLayout()
+                        }
+                        .scrollIndicators(.hidden)
+                        .scrollTargetBehavior(.viewAligned)
+                        .contentMargins(.horizontal, 24, for: .scrollContent)
+                    }
                     
                     if let friends = note.friends, !friends.isEmpty {
                         VStack(alignment: .leading, spacing: 8) {
@@ -52,11 +77,11 @@ struct NotePreviewView: View {
                                 }
                             }
                         }
+                        .padding(.horizontal, 24)
                     }
                 }
                 .frame(maxWidth: .infinity)
             }
-            .contentMargins(24, for: .scrollContent)
             .background(Color.memoirPaper)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -82,6 +107,13 @@ struct NotePreviewView: View {
                         isEditing = false
                     }
                 )
+            }
+            .fullScreenCover(item: $fullScreenPhoto) { photo in
+                if let image = photo.image {
+                    FullScreenImageView(image: image) {
+                        fullScreenPhoto = nil
+                    }
+                }
             }
         }
     }

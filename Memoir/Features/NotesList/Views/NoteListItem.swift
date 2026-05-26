@@ -12,26 +12,38 @@ struct NoteListItem: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text(note.date, format: .dateTime.month(.abbreviated).day().year())
-                .font(.system(.caption, design: .serif))
-                .foregroundStyle(Color.memoirGold)
+            if let firstPhoto = note.photos?.first, let image = firstPhoto.image {
+                image
+                    .resizable()
+                    .scaledToFill()
+                    .frame(height: 160)
+                    .frame(maxWidth: .infinity)
+                    .clipShape(.rect(cornerRadius: 8))
+            }
             
-            Text(note.title)
-                .font(.system(.headline, design: .serif))
-                .foregroundStyle(Color.memoirInk)
-                .lineLimit(2)
-            
-            if let friends = note.friends, !friends.isEmpty {
-                FriendAvatarStack(friends: friends)
+            VStack(alignment: .leading, spacing: 12) {
+                Text(note.date, format: .dateTime.month(.abbreviated).day().year())
+                    .font(.system(.caption, design: .serif))
+                    .foregroundStyle(Color.memoirGold)
+                
+                Text(note.title)
+                    .font(.system(.subheadline, design: .serif))
+                    .bold()
+                    .foregroundStyle(Color.memoirInk)
+                    .lineLimit(2)
+                
+                if let friends = note.friends, !friends.isEmpty {
+                    FriendAvatarStack(friends: friends)
+                }
             }
         }
+        .padding(12)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding()
-        .background(Color.memoirInk.opacity(0.03))
+        .background(Color.memoirGold.opacity(0.08))
         .clipShape(.rect(cornerRadius: 12))
         .overlay(
             RoundedRectangle(cornerRadius: 12)
-                .strokeBorder(Color.memoirInk.opacity(0.08), lineWidth: 1)
+                .strokeBorder(Color.memoirGold.opacity(0.2), lineWidth: 1)
         )
 //        .listRowSeparator(.hidden)
 //        .listRowBackground(Color.memoirPaper)
