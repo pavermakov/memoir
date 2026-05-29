@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		ACC687BB2FC71DAA001E06FA /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = ACC687BA2FC71DAA001E06FA /* FirebaseAnalytics */; };
+		ACC687BD2FC71DAA001E06FA /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = ACC687BC2FC71DAA001E06FA /* FirebaseAuth */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		AC7C72672FBF3A1200A8E35B /* Memoir.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Memoir.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -14,7 +19,7 @@
 		AC7C72762FBF3DD100A8E35B /* Exceptions for "Memoir" folder in "Memoir" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				System/Info.plist,
 			);
 			target = AC7C72662FBF3A1200A8E35B /* Memoir */;
 		};
@@ -36,6 +41,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACC687BB2FC71DAA001E06FA /* FirebaseAnalytics in Frameworks */,
+				ACC687BD2FC71DAA001E06FA /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +85,8 @@
 			);
 			name = Memoir;
 			packageProductDependencies = (
+				ACC687BA2FC71DAA001E06FA /* FirebaseAnalytics */,
+				ACC687BC2FC71DAA001E06FA /* FirebaseAuth */,
 			);
 			productName = Memoir;
 			productReference = AC7C72672FBF3A1200A8E35B /* Memoir.app */;
@@ -107,6 +116,9 @@
 			);
 			mainGroup = AC7C725E2FBF3A1200A8E35B;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				ACC687B92FC71DAA001E06FA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = AC7C72682FBF3A1200A8E35B /* Products */;
 			projectDirPath = "";
@@ -269,7 +281,7 @@
 				DEVELOPMENT_TEAM = GXWNL665WA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Memoir/Info.plist;
+				INFOPLIST_FILE = Memoir/System/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Memoir;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -307,7 +319,7 @@
 				DEVELOPMENT_TEAM = GXWNL665WA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Memoir/Info.plist;
+				INFOPLIST_FILE = Memoir/System/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Memoir;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -357,6 +369,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		ACC687B92FC71DAA001E06FA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = exactVersion;
+				version = 12.14.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		ACC687BA2FC71DAA001E06FA /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ACC687B92FC71DAA001E06FA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		ACC687BC2FC71DAA001E06FA /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ACC687B92FC71DAA001E06FA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AC7C725F2FBF3A1200A8E35B /* Project object */;
 }

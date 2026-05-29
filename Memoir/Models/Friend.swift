@@ -23,8 +23,7 @@ final class Friend {
     }
     
     var profileImage: Image? {
-        guard let data = profileImageData,
-              let uiImage = UIImage(data: data) else { return nil }
+        guard let data = profileImageData, let uiImage = UIImage(data: data) else { return nil }
         return Image(uiImage: uiImage)
     }
 }

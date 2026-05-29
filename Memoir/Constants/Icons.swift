@@ -20,4 +20,5 @@ struct Icon {
     static let camera = "camera.fill"
     static let friends = "person.2"
     static let edit = "pencil"
+    static let settings = "gearshape"
 }
