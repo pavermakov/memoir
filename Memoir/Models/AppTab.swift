@@ -10,4 +10,5 @@ import Foundation
 enum AppTab: Hashable {
     case memories
     case friends
+    case settings
 }

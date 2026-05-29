@@ -10,7 +10,7 @@ import SwiftData
 
 struct MemoriesListView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query(sort: \Memory.date, order: .reverse) private var memories: [Memory]
+    @Query(sort: \Memory.date, order: .reverse, animation: .bouncy) private var memories: [Memory]
     @State private var isEditorOpen = false
     @State private var selectedMemory: Memory?
     
